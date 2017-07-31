@@ -1,0 +1,30 @@
+<div class="row">
+	<div class="col-md-3">
+		<h4>Welcome {{model.username}}</h4>
+		<h5><a href="#" class="text-center" (click)="logout()">Logout</a></h5>
+	</div>
+	<div class="col-md-9">
+		<input type="text" name="searchTerm" #searchTerm (keyup)="search(searchTerm.value);" class="form-control" focus placeholder="Search for planets">
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-3"></div>
+	<div class="col-md-9">
+		<h3 *ngIf="loading">Loading...</h3>
+		<div *ngIf="!loading && model.planets && model.planets.length" class="planets-list">
+			<table class="table table-responsive table-hover">
+				<thead>
+					<th>Name</th>
+					<th>Population</th>
+				</thead>
+				<tbody>
+			  		<tr [style.font-size]="planet.population/model.maxPopulation*maxFontSize+'px'" *ngFor="let planet of model.planets">
+			  			<td [style.font-size]="planet.population/model.maxPopulation*maxFontSize+'px'">{{planet.name}}</td>
+			  			<td [style.font-size]="planet.population/model.maxPopulation*maxFontSize+'px'">{{planet.population}}</td>
+			  		</tr>
+				</tbody>
+			</table>
+		</div>
+		<h5 *ngIf="!loading && model.planets && !model.planets.length">No results found.</h5>
+	</div>
+</div>
